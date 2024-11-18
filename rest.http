@@ -1,0 +1,45 @@
+POST http://103.15.67.180:4014/auth/register HTTP/1.1
+content-type: application/json
+
+{
+	"name":"admin",
+	"mobileNo":"9752073917",
+	"email":"admin@gmail.com",
+	"password":"admin",
+	"userType": "1"
+}
+
+
+###Login Route
+
+POST http://localhost:4000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "mobileNo":"9752073917",
+	"password":"admin"
+}
+
+### Refresh-token Route
+
+POST http://localhost:4000/auth/refresh-token HTTP/1.1
+content-type: application/json
+
+{
+     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg0MTkwODYsImV4cCI6MTY5OTk3NjY4NiwiYXVkIjoiNjM3MjBlMGUyZTM3MmNmZjNlNzllZjg4IiwiaXNzIjoic2FsYXNhci1ncm91cC5jb20ifQ._mLkDD9DZrLGtoHMOE3SZdie8c8xwYWmZ4nk2RWqWC8"
+}
+
+### Logout Route
+
+DELETE  http://localhost:4000/auth/logout HTTP/1.1
+content-type: application/json
+
+{
+     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg0MTkwODYsImV4cCI6MTY5OTk3NjY4NiwiYXVkIjoiNjM3MjBlMGUyZTM3MmNmZjNlNzllZjg4IiwiaXNzIjoic2FsYXNhci1ncm91cC5jb20ifQ._mLkDD9DZrLGtoHMOE3SZdie8c8xwYWmZ4nk2RWqWC8"
+}
+
+### / Route
+
+GET   http://localhost:4000 HTTP/1.1
+content-type: "application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Njg0MjUwMTYsImV4cCI6MTY2ODQyODYxNiwiYXVkIjoiNjM3MjI1Mzc5NTVmN2ZhZjNjZTYzNmFiIiwiaXNzIjoic2FsYXNhci1ncm91cC5jb20ifQ.f9ZEiABnY5HV6GQKGojfbVuKB9IN1g_qDdbuNB29HuM
