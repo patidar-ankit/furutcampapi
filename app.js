@@ -11,6 +11,8 @@ import PropertyRoute from './Routes/Property.route.js'
 import ExperienceRoute from './Routes/Experience.route.js'
 import ConveyanceRoute from './Routes/Conveyance.route.js'
 import BookingRoute from './Routes/Booking.route.js'
+import https from 'https'
+
 
 import cors from 'cors';
 import path from 'path';
@@ -24,6 +26,10 @@ initMongoDB();
 // initRedis();
 
 const app = express();
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/api.furutcamps.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/api.furutcamps.com/fullchain.pem')
+};
 global.__basedir = __dirname;
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -63,6 +69,10 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+/*app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});*/
+
+https.createServer(options, app).listen(4014, () => {
+  console.log('Server is running on https://api.furutcamps.com:4014/');
 });
