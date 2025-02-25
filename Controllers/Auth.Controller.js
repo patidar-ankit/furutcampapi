@@ -10,6 +10,7 @@ import Languages from '../Models/Language.model.js';
 import GuestUser from '../Models/GuesUser.model.js';
 import moment from 'moment';
 import { decryptData } from '../helpers/common_helpers.js';
+import { sendOTP } from '../helpers/otp_send_helper.js';
 const AuthController = {
   register: async (req, res, next) => {
     try {
@@ -128,7 +129,7 @@ const AuthController = {
           otp: otp
         }
         await User.findByIdAndUpdate(user.id, { otp: otp, otpVerification: false })
-
+        await sendOTP(value.mobileNo, otp)
         sendSuccessResponse(res, result, 'OTP successfully sent to your registered mobile number.');
       }
     } catch (error) {
@@ -241,6 +242,7 @@ const AuthController = {
       //   otp: otp
       // }}
       sendSuccessResponse(res, result, 'OTP successfully sent to your registered mobile number.');
+      await sendOTP(reqBody.mobileNo, otp)
     } catch (error) {
       if (error.isJoi === true) {
         return sendErrorResponse(res, error, 'Validation Error', 400);
@@ -323,6 +325,7 @@ const AuthController = {
         otp: otp,
         mobileNo: reqBody.mobileNo
       }
+      await sendOTP(reqBody.mobileNo, otp)
       sendSuccessResponse(res, result, 'OTP successfully sent to your registered mobile number.');
     } catch (error) {
       if (error.isJoi === true) {
@@ -352,7 +355,7 @@ const AuthController = {
           otp: otp
         }
         await User.findByIdAndUpdate(user.id, { otp: otp, otpVerification: false })
-
+        await sendOTP(value.mobileNo, otp)
         sendSuccessResponse(res, result, 'OTP successfully sent to your registered mobile number.');
       }
     } catch (error) {
